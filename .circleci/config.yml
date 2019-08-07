@@ -1,0 +1,116 @@
+defaults: &defaults
+  working_directory: ~/code
+  docker:
+    - image: circleci/jdk8:0.1.1
+  environment:
+    JVM_OPTS: -Xmx3200m
+    GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+    _JAVA_OPTIONS: "-Xms256m -Xmx1280m -XX:MaxPermSize=350m"
+
+version: 2
+jobs:
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars--{{ checksum "build.gradle" }}-{{ checksum  "backend/build.gradle" }}-{{ checksum  "web/build.gradle" }}
+      - run:
+          name: Lint project
+          command: ./gradlew -Porg.gradle.project.buildAndroid=false detekt
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars--{{ checksum "build.gradle" }}-{{ checksum  "backend/build.gradle" }}-{{ checksum  "web/build.gradle" }}
+      - run:
+          name: Save detekt results
+          command: |
+            mkdir -p ~/detekt/
+            find . -type f -regex ".*/build/reports/detekt/*" -exec cp {} ~/detekt/ \;
+          when: always
+      - store_test_results:
+          path: ~/detekt
+      - store_artifacts:
+          path: ~/detekt
+
+  build-backend:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars--{{ checksum "build.gradle" }}-{{ checksum  "backend/build.gradle" }}
+      - run:
+          name: Build project
+          command: ./gradlew -Porg.gradle.project.buildAndroid=false :backend:assemble --stacktrace
+      - store_artifacts:
+          path: backend/build/libs
+      - run:
+          name: Run Tests
+          command: ./gradlew -Porg.gradle.project.buildAndroid=false :backend:test --stacktrace
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars--{{ checksum "build.gradle" }}-{{ checksum  "backend/build.gradle" }}
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
+
+  build-web:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars--{{ checksum "build.gradle" }}-{{ checksum  "backend/build.gradle" }}-{{ checksum  "web/build.gradle" }}
+      - run:
+          name: Build project
+          command: ./gradlew -Porg.gradle.project.buildAndroid=false :web:assemble --stacktrace
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars--{{ checksum "build.gradle" }}-{{ checksum  "backend/build.gradle" }}-{{ checksum  "web/build.gradle" }}
+      - store_artifacts:
+          path: web/build/libs
+      - run:
+          name: Run Tests
+          command: ./gradlew -Porg.gradle.project.buildAndroid=false :web:test --stacktrace
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
+
+  deploy-backend:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push $HEROKU_URL master
+
+workflows:
+  version: 2
+  pr-checks:
+    jobs:
+      - lint
+      - build-backend
+      - build-web
+#  deploy:
+#    jobs:
+#      - deploy-backend:
+#          filters:
+#            branches:
+#              only: master
