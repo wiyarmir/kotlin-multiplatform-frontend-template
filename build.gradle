@@ -12,7 +12,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:$Versions.kotlinFrontendPlugin"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$Versions.kotlin"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$Versions.kotlin"
-        classpath "com.github.jengelman.gradle.plugins:shadow:5.0.0"
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$Versions.detekt"
         classpath 'co.touchlab:kotlinxcodesync:0.1.2'
     }
@@ -45,7 +45,6 @@ subprojects {
 
     detekt {
         toolVersion = Versions.detekt
-        filters = ".*/resources/.*,.*/build/.*"
         config = files("$rootDir/detekt.yml")
     }
     dependencies {

@@ -1,5 +1,7 @@
 package org.example.kotlin.multiplatform.api
 
+object Paths
+
 object Api {
     const val path = "/api"
 
