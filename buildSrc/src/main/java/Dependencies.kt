@@ -5,16 +5,15 @@ object Versions {
     const val html = "0.6.9"
     const val jsoup = "1.9.1"
     const val junit = "4.12"
-    const val kotlin = "1.3.72"
+    const val kotlin = "1.4.0"
     const val react = "16.8.6"
-    const val kotlinFrontendPlugin = "0.0.45"
     const val kotlinJsExt = "1.0.1-pre.79-kotlin-1.3.41"
     const val kotlinWrapper = "$react-pre.79-kotlin-1.3.41"
-    const val kotlinxCoroutines = "1.2.1"
-    const val ktor = "1.3.2"
+    const val kotlinxCoroutines = "1.3.7"
+    const val ktor = "1.4.0"
     const val logback = "1.2.1"
     const val mockitoKotlin = "2.1.0"
-    const val serialization = "0.20.0"
+    const val serialization = "1.0.0-RC"
     const val squash = "0.2.4"
     const val reactRouterDom = "4.3.1"
     const val kotlinReactRouterDom = "$reactRouterDom-pre.79-kotlin-1.3.41"
@@ -34,27 +33,19 @@ object Libs {
     const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
 
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-    const val kotlinStdlibCommon = "org.jetbrains.kotlin:kotlin-stdlib-common:${Versions.kotlin}"
-    const val kotlinStdlibJs = "org.jetbrains.kotlin:kotlin-stdlib-js:${Versions.kotlin}"
 
     const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     const val kotlinTestCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
     const val kotlinTestJs = "org.jetbrains.kotlin:kotlin-test-js:${Versions.kotlin}"
     const val kotlinTestJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
 
-    const val kotlinxCoroutinesCoreCommon =
+    const val kotlinxCoroutinesCore =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${Versions.kotlinxCoroutines}"
-    const val kotlinxCoroutinesCoreJs = "org.jetbrains.kotlinx:kotlinx-coroutines-core-js:${Versions.kotlinxCoroutines}"
     const val kotlinxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinxCoroutines}"
 
     const val kotlinxHtmlJs = "org.jetbrains.kotlinx:kotlinx-html-js:${Versions.html}"
 
-    const val kotlinxSerializationRuntime =
-        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.serialization}"
-    const val kotlinxSerializationRuntimeCommon =
-        "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${Versions.serialization}"
-    const val kotlinxSerializationRuntimeJs =
-        "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:${Versions.serialization}"
+    const val kotlinxSerializationCore = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.serialization}"
 
     const val ktorHtmlBuilder = "io.ktor:ktor-html-builder:${Versions.ktor}"
     const val ktorLocations = "io.ktor:ktor-locations:${Versions.ktor}"
@@ -64,16 +55,10 @@ object Libs {
 
     const val ktorClientAuth = "io.ktor:ktor-client-auth:${Versions.ktor}"
     const val ktorClientJson = "io.ktor:ktor-client-json:${Versions.ktor}"
-    const val ktorClientJsonJvm = "io.ktor:ktor-client-json-jvm:${Versions.ktor}"
-    const val ktorClientJsonJs = "io.ktor:ktor-client-json-js:${Versions.ktor}"
     const val ktorClientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
-    const val ktorClientSerializationJs = "io.ktor:ktor-client-serialization-js:${Versions.ktor}"
-    const val ktorClientSerializationJvm = "io.ktor:ktor-client-serialization-jvm:${Versions.ktor}"
     const val ktorClientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
     const val ktorClientJs = "io.ktor:ktor-client-js:${Versions.ktor}"
     const val ktorClientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
-    const val ktorClientLoggingJvm = "io.ktor:ktor-client-logging-jvm:${Versions.ktor}"
-    const val ktorClientLoggingJs = "io.ktor:ktor-client-logging-js:${Versions.ktor}"
     const val ktorClientOkHttp = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
 
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"

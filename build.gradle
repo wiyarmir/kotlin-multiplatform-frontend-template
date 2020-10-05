@@ -9,7 +9,6 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:$Versions.kotlinFrontendPlugin"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$Versions.kotlin"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$Versions.kotlin"
         classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"

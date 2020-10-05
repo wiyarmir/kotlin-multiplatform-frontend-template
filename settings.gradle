@@ -3,5 +3,3 @@ rootProject.name = 'kotlin-multiplatform-frontend-template'
 include 'common'
 include 'backend'
 include 'web'
-
-enableFeaturePreview('GRADLE_METADATA')
